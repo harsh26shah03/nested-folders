@@ -1,7 +1,8 @@
-/* eslint-disable react/prop-types */
 import File from './File'
 import { useState } from 'react'
 
+
+// Random color generator to get folder boundaries.
 const getRandomColors = () => {
   const contrastColors = [
     '#F94144',
@@ -28,9 +29,9 @@ const getRandomColors = () => {
 }
 
 const Folder = ({ data, name, dispatch }) => {
-  const [isFolderOpen, setIsFolderOpen] = useState(false)
-  const [color] = useState(getRandomColors())
-  const [hover, setHover] = useState(false)
+  const [isFolderOpen, setIsFolderOpen] = useState(false) // Folder state, whether it is open or not
+  const [color] = useState(getRandomColors()) // Color state
+  const [hover, setHover] = useState(false) // Folder hover state to get same color outline when hovered
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20 }}>
@@ -57,6 +58,8 @@ const Folder = ({ data, name, dispatch }) => {
           <span>{isFolderOpen ? '-' : '+'}</span>
         </div>
       </button>
+
+      {/* If folder is opened recursively call folder or file depending upon the type. */}
 
       {isFolderOpen ? (
         <div

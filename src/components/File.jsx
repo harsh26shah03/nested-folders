@@ -1,6 +1,6 @@
-/* eslint-disable react/prop-types */
-
 import { useState } from 'react'
+
+// Base case of recursion. File with name
 
 const File = ({ name, dispatch }) => {
   

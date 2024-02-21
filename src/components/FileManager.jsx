@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import Folder from './Folder'
 import File from './File'
@@ -9,6 +8,7 @@ const FileManager = () => {
   // We can use conventional fetch instead of import when actual API is available
   const [files] = useState(data)
 
+  // Using reducer to manage state of opened file so we don't have to do prop drilling
   const [state, dispatch] = useReducer(
     (state, action) => {
       switch (action.type) {
@@ -33,7 +33,10 @@ const FileManager = () => {
 
   return (
     <div style={{ display: 'flex', width: '100%', gap: 20 }}>
+      {/* Inflection point of recursion, starting point, it can be file or folder */}
       <div style={{ width: '20%' }}>{root(dispatch)}</div>
+
+      {/* Preview of file opened. */}
       {state?.openedFile ? (
         <div
           style={{
