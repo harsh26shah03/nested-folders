@@ -33,6 +33,18 @@ const ContextMenu = ({ position, folder, dispatch, open }) => {
       >
         Copy
       </div>
+      <div
+        onClick={(e) => handleClick(e, 'rename')}
+        className="context-menu-item"
+      >
+        Rename
+      </div>
+      <div
+        onClick={(e) => handleClick(e, 'delete')}
+        className="context-menu-item"
+      >
+        Delete
+      </div>
     </div>
   ) : null
 }
