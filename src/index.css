@@ -18,7 +18,7 @@ h1 {
   line-height: 1.1;
 }
 
-button {
+.folder {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
@@ -29,6 +29,48 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+.folder:hover {
   border-color: #646cff;
+}
+
+.context-menu {
+  z-index: 100;
+  padding: 0.3em 0.6em;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.87);
+}
+
+.context-menu:hover {
+  border-radius: 8px;
+} 
+
+.context-menu-item {
+  padding: 0.3em 0.6em;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+.context-menu-item:hover {
+  background-color: #dfdfdf;
+  border-radius: 8px;
+} 
+
+.notification {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  padding: 1em;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.25);
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.87);
+  z-index: 100;
 }

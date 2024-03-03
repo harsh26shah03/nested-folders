@@ -1,7 +1,6 @@
 import File from './File'
 import { useState } from 'react'
 
-
 // Random color generator to get folder boundaries.
 const getRandomColors = () => {
   const contrastColors = [
@@ -35,16 +34,31 @@ const Folder = ({ data, name, dispatch }) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', marginLeft: 20 }}>
-      <button
-        onClick={() => setIsFolderOpen(!isFolderOpen)}
+      <div
+        onClick={() => {
+          setIsFolderOpen(!isFolderOpen)
+        }}
+        onContextMenu={(e) => {
+          e.preventDefault()
+          dispatch({ type: 'contextMenuNotification', payload: false })
+          dispatch({
+            type: 'contextMenuOpen',
+            payload: {
+              open: true,
+              position: { x: e.nativeEvent.layerX, y: e.nativeEvent.layerY },
+              destination: name
+            }
+          })
+        }}
         style={{
           width: '100%',
           transition: '0.5s all',
           marginBottom: 20,
-          ...(hover ? { borderColor: color } : {})
+          ...(hover || isFolderOpen ? { borderColor: color } : {})
         }}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        className="folder"
       >
         <div
           style={{
@@ -57,7 +71,7 @@ const Folder = ({ data, name, dispatch }) => {
           <span>{name}</span>
           <span>{isFolderOpen ? '-' : '+'}</span>
         </div>
-      </button>
+      </div>
 
       {/* If folder is opened recursively call folder or file depending upon the type. */}
 
@@ -75,7 +89,14 @@ const Folder = ({ data, name, dispatch }) => {
             if (item.type === 'file') {
               return <File name={item.name} key={idx} dispatch={dispatch} />
             } else if (item.type === 'folder') {
-              return <Folder data={item.data} name={item.name} key={idx} dispatch={dispatch} />
+              return (
+                <Folder
+                  data={item.data}
+                  name={item.name}
+                  key={idx}
+                  dispatch={dispatch}
+                />
+              )
             }
           })}
         </div>
